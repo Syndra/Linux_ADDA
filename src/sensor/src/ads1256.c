@@ -1,5 +1,5 @@
 #include <ads1256.h>
-#include <bcm2835.h>  
+#include <bcm2835.h>
 #include <stdio.h>
 #include <unistd.h>
 #include <string.h>
@@ -15,7 +15,7 @@ void  bsp_DelayUS(uint64_t micros)
 /*
 *********************************************************************************************************
 *	name: bsp_InitADS1256
-*	function: Configuration of the STM32 GPIO and SPI interface£¬The connection ADS1256
+*	function: Configuration of the STM32 GPIO and SPI interfaceï¿½ï¿½The connection ADS1256
 *	parameter: NULL
 *	The return value: NULL
 *********************************************************************************************************
@@ -30,7 +30,7 @@ void bsp_InitADS1256(void)
 	DI_0();
 #endif
 
-//ADS1256_CfgADC(ADS1256_GAIN_1, ADS1256_1000SPS);	/* ÅäÖÃADC²ÎÊý£º ÔöÒæ1:1, Êý¾ÝÊä³öËÙÂÊ 1KHz */
+//ADS1256_CfgADC(ADS1256_GAIN_1, ADS1256_1000SPS);	/* ï¿½ï¿½ï¿½ï¿½ADCï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½1:1, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 1KHz */
 }
 
 
@@ -40,14 +40,14 @@ void bsp_InitADS1256(void)
 *********************************************************************************************************
 *	name: ADS1256_StartScan
 *	function: Configuration DRDY PIN for external interrupt is triggered
-*	parameter: _ucDiffMode : 0  Single-ended input  8 channel£¬ 1 Differential input  4 channe
+*	parameter: _ucDiffMode : 0  Single-ended input  8 channelï¿½ï¿½ 1 Differential input  4 channe
 *	The return value: NULL
 *********************************************************************************************************
 */
 void ADS1256_StartScan(uint8_t _ucScanMode)
 {
 	g_tADS1256.ScanMode = _ucScanMode;
-	/* ¿ªÊ¼É¨ÃèÇ°, ÇåÁã½á¹û»º³åÇø */
+	/* ï¿½ï¿½Ê¼É¨ï¿½ï¿½Ç°, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
 	{
 		uint8_t i;
 
@@ -125,7 +125,7 @@ void ADS1256_CfgADC(ADS1256_GAIN_E _gain, ADS1256_DRATE_E _drate)
 
         //ADS1256_WriteReg(REG_STATUS, (0 << 3) | (1 << 2) | (1 << 1));
 
-		buf[1] = 0x08;	
+		buf[1] = 0x08;
 
 		/*	ADCON: A/D Control Register (Address 02h)
 			Bit 7 Reserved, always 0 (Read Only)
@@ -138,9 +138,9 @@ void ADS1256_CfgADC(ADS1256_GAIN_E _gain, ADS1256_DRATE_E _drate)
 
 			Bits 4-3 SDCS1, SCDS0: Sensor Detect Current Sources
 				00 = Sensor Detect OFF (default)
-				01 = Sensor Detect Current = 0.5 ¦Ì A
-				10 = Sensor Detect Current = 2 ¦Ì A
-				11 = Sensor Detect Current = 10¦Ì A
+				01 = Sensor Detect Current = 0.5 ï¿½ï¿½ A
+				10 = Sensor Detect Current = 2 ï¿½ï¿½ A
+				11 = Sensor Detect Current = 10ï¿½ï¿½ A
 				The Sensor Detect Current Sources can be activated to verify  the integrity of an external sensor supplying a signal to the
 				ADS1255/6. A shorted sensor produces a very small signal while an open-circuit sensor produces a very large signal.
 
@@ -156,7 +156,7 @@ void ADS1256_CfgADC(ADS1256_GAIN_E _gain, ADS1256_DRATE_E _drate)
 		*/
 		buf[2] = (0 << 5) | (0 << 3) | (_gain << 0);
 		//ADS1256_WriteReg(REG_ADCON, (0 << 5) | (0 << 2) | (GAIN_1 << 1));	/*choose 1: gain 1 ;input 5V/
-		buf[3] = s_tabDataRate[_drate];	// DRATE_10SPS;	
+		buf[3] = s_tabDataRate[_drate];	// DRATE_10SPS;
 
 		CS_0();	/* SPIÆ¬Ñ¡ = 0 */
 		ADS1256_Send8Bit(CMD_WREG | 0);	/* Write command register, send the register address */
@@ -304,7 +304,7 @@ static void ADS1256_SetChannal(uint8_t _ch)
 		0101 = AIN5 (ADS1256 only)
 		0110 = AIN6 (ADS1256 only)
 		0111 = AIN7 (ADS1256 only)
-		1xxx = AINCOM (when PSEL3 = 1, PSEL2, PSEL1, PSEL0 are ¡°don¡¯t care¡±)
+		1xxx = AINCOM (when PSEL3 = 1, PSEL2, PSEL1, PSEL0 are ï¿½ï¿½donï¿½ï¿½t careï¿½ï¿½)
 
 		NOTE: When using an ADS1255 make sure to only select the available inputs.
 
@@ -317,7 +317,7 @@ static void ADS1256_SetChannal(uint8_t _ch)
 		0101 = AIN5 (ADS1256 only)
 		0110 = AIN6 (ADS1256 only)
 		0111 = AIN7 (ADS1256 only)
-		1xxx = AINCOM (when NSEL3 = 1, NSEL2, NSEL1, NSEL0 are ¡°don¡¯t care¡±)
+		1xxx = AINCOM (when NSEL3 = 1, NSEL2, NSEL1, NSEL0 are ï¿½ï¿½donï¿½ï¿½t careï¿½ï¿½)
 	*/
 	if (_ch > 7)
 	{
@@ -346,7 +346,7 @@ static void ADS1256_SetDiffChannal(uint8_t _ch)
 		0101 = AIN5 (ADS1256 only)
 		0110 = AIN6 (ADS1256 only)
 		0111 = AIN7 (ADS1256 only)
-		1xxx = AINCOM (when PSEL3 = 1, PSEL2, PSEL1, PSEL0 are ¡°don¡¯t care¡±)
+		1xxx = AINCOM (when PSEL3 = 1, PSEL2, PSEL1, PSEL0 are ï¿½ï¿½donï¿½ï¿½t careï¿½ï¿½)
 
 		NOTE: When using an ADS1255 make sure to only select the available inputs.
 
@@ -359,23 +359,23 @@ static void ADS1256_SetDiffChannal(uint8_t _ch)
 		0101 = AIN5 (ADS1256 only)
 		0110 = AIN6 (ADS1256 only)
 		0111 = AIN7 (ADS1256 only)
-		1xxx = AINCOM (when NSEL3 = 1, NSEL2, NSEL1, NSEL0 are ¡°don¡¯t care¡±)
+		1xxx = AINCOM (when NSEL3 = 1, NSEL2, NSEL1, NSEL0 are ï¿½ï¿½donï¿½ï¿½t careï¿½ï¿½)
 	*/
 	if (_ch == 0)
 	{
-		ADS1256_WriteReg(REG_MUX, (0 << 4) | 1);	/* DiffChannal  AIN0£¬ AIN1 */
+		ADS1256_WriteReg(REG_MUX, (0 << 4) | 1);	/* DiffChannal  AIN0ï¿½ï¿½ AIN1 */
 	}
 	else if (_ch == 1)
 	{
-		ADS1256_WriteReg(REG_MUX, (2 << 4) | 3);	/*DiffChannal   AIN2£¬ AIN3 */
+		ADS1256_WriteReg(REG_MUX, (2 << 4) | 3);	/*DiffChannal   AIN2ï¿½ï¿½ AIN3 */
 	}
 	else if (_ch == 2)
 	{
-		ADS1256_WriteReg(REG_MUX, (4 << 4) | 5);	/*DiffChannal    AIN4£¬ AIN5 */
+		ADS1256_WriteReg(REG_MUX, (4 << 4) | 5);	/*DiffChannal    AIN4ï¿½ï¿½ AIN5 */
 	}
 	else if (_ch == 3)
 	{
-		ADS1256_WriteReg(REG_MUX, (6 << 4) | 7);	/*DiffChannal   AIN6£¬ AIN7 */
+		ADS1256_WriteReg(REG_MUX, (6 << 4) | 7);	/*DiffChannal   AIN6ï¿½ï¿½ AIN7 */
 	}
 }
 
@@ -400,7 +400,7 @@ static void ADS1256_WaitDRDY(void)
 	}
 	if (i >= 400000)
 	{
-		printf("ADS1256_WaitDRDY() Time Out ...\r\n");		
+		printf("ADS1256_WaitDRDY() Time Out ...\r\n");
 	}
 }
 
@@ -476,7 +476,7 @@ int32_t ADS1256_GetAdc(uint8_t _ch)
 */
 void ADS1256_ISR(void)
 {
-	if (g_tADS1256.ScanMode == 0)	/*  0  Single-ended input  8 channel£¬ 1 Differential input  4 channe */
+	if (g_tADS1256.ScanMode == 0)	/*  0  Single-ended input  8 channelï¿½ï¿½ 1 Differential input  4 channe */
 	{
 
 		ADS1256_SetChannal(g_tADS1256.Channel);	/*Switch channel mode */
@@ -490,11 +490,11 @@ void ADS1256_ISR(void)
 
 		if (g_tADS1256.Channel == 0)
 		{
-			g_tADS1256.AdcNow[7] = ADS1256_ReadData();	
+			g_tADS1256.AdcNow[7] = ADS1256_ReadData();
 		}
 		else
 		{
-			g_tADS1256.AdcNow[g_tADS1256.Channel-1] = ADS1256_ReadData();	
+			g_tADS1256.AdcNow[g_tADS1256.Channel-1] = ADS1256_ReadData();
 		}
 
 		if (++g_tADS1256.Channel >= 8)
@@ -504,7 +504,7 @@ void ADS1256_ISR(void)
 	}
 	else	/*DiffChannal*/
 	{
-		
+
 		ADS1256_SetDiffChannal(g_tADS1256.Channel);	/* change DiffChannal */
 		bsp_DelayUS(5);
 
@@ -516,11 +516,11 @@ void ADS1256_ISR(void)
 
 		if (g_tADS1256.Channel == 0)
 		{
-			g_tADS1256.AdcNow[3] = ADS1256_ReadData();	
+			g_tADS1256.AdcNow[3] = ADS1256_ReadData();
 		}
 		else
 		{
-			g_tADS1256.AdcNow[g_tADS1256.Channel-1] = ADS1256_ReadData();	
+			g_tADS1256.AdcNow[g_tADS1256.Channel-1] = ADS1256_ReadData();
 		}
 
 		if (++g_tADS1256.Channel >= 4)
@@ -533,7 +533,7 @@ void ADS1256_ISR(void)
 /*
 *********************************************************************************************************
 *	name: ADS1256_Scan
-*	function: 
+*	function:
 *	parameter:NULL
 *	The return value:  1
 *********************************************************************************************************
@@ -551,9 +551,9 @@ uint8_t ADS1256_Scan(void)
 /*
 *********************************************************************************************************
 *	name: Write_DAC8552
-*	function:  DAC send data 
-*	parameter: channel : output channel number 
-*			   data : output DAC value 
+*	function:  DAC send data
+*	parameter: channel : output channel number
+*			   data : output DAC value
 *	The return value:  NULL
 *********************************************************************************************************
 */
@@ -565,7 +565,7 @@ void Write_DAC8552(uint8_t channel, uint16_t Data)
 	 CS_0() ;
       bcm2835_spi_transfer(channel);
       bcm2835_spi_transfer((Data>>8));
-      bcm2835_spi_transfer((Data&0xff));  
+      bcm2835_spi_transfer((Data&0xff));
       CS_1() ;
 }
 /*
@@ -573,7 +573,7 @@ void Write_DAC8552(uint8_t channel, uint16_t Data)
 *	name: Voltage_Convert
 *	function:  Voltage value conversion function
 *	parameter: Vref : The reference voltage 3.3V or 5V
-*			   voltage : output DAC value 
+*			   voltage : output DAC value
 *	The return value:  NULL
 *********************************************************************************************************
 */
@@ -581,14 +581,16 @@ uint16_t Voltage_Convert(float Vref, float voltage)
 {
 	uint16_t _D_;
 	_D_ = (uint16_t)(65536 * voltage / Vref);
-    
+
 	return _D_;
 }
 
 /* Added */
 int ads1256_begin() {
-	if (!bcm2835_init())
+	if (!bcm2835_init()){
+		fprintf(stdout, "BCM INIT FAILED\n");
 		return 1;
+	}
 	bcm2835_spi_begin();
 	bcm2835_spi_setBitOrder(BCM2835_SPI_BIT_ORDER_LSBFIRST );      // The default
 	bcm2835_spi_setDataMode(BCM2835_SPI_MODE1);                   // The default
@@ -596,7 +598,7 @@ int ads1256_begin() {
 	bcm2835_gpio_fsel(SPICS, BCM2835_GPIO_FSEL_OUTP);//
 	bcm2835_gpio_write(SPICS, HIGH);
 	bcm2835_gpio_fsel(DRDY, BCM2835_GPIO_FSEL_INPT);
-	bcm2835_gpio_set_pud(DRDY, BCM2835_GPIO_PUD_UP);    	
+	bcm2835_gpio_set_pud(DRDY, BCM2835_GPIO_PUD_UP);
 	ADS1256_CfgADC(ADS1256_GAIN_1, ADS1256_15SPS);
 	ADS1256_StartScan(0);
 }
