@@ -600,7 +600,6 @@ int ads1256_begin() {
 	bcm2835_gpio_set_pud(DRDY, BCM2835_GPIO_PUD_UP);
 	ADS1256_CfgADC(ADS1256_GAIN_1, ADS1256_15SPS);
 	ADS1256_StartScan(0);
-	fprintf(stdout, "BCM INIT FAILED\n");
 }
 
 /* Added */
