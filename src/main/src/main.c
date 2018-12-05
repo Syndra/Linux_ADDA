@@ -24,18 +24,7 @@ int main(){
 	}
 
 	/* Initialize */
-	if(!ads1256_begin()) return 1;
-
-	bcm2835_spi_begin();
-	bcm2835_spi_setBitOrder(BCM2835_SPI_BIT_ORDER_LSBFIRST );      // The default
-	bcm2835_spi_setDataMode(BCM2835_SPI_MODE1);                   // The default
-	bcm2835_spi_setClockDivider(BCM2835_SPI_CLOCK_DIVIDER_1024); // The default
-	bcm2835_gpio_fsel(SPICS, BCM2835_GPIO_FSEL_OUTP);//
-	bcm2835_gpio_write(SPICS, HIGH);
-	bcm2835_gpio_fsel(DRDY, BCM2835_GPIO_FSEL_INPT);
-	bcm2835_gpio_set_pud(DRDY, BCM2835_GPIO_PUD_UP);
-	ADS1256_CfgADC(ADS1256_GAIN_1, ADS1256_15SPS);
-	ADS1256_StartScan(0);
+	ads1256_begin();
 
 	while(1){
 		/* Sensing */
