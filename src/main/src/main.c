@@ -34,50 +34,11 @@ uint8_t buf[3];
 	/* Initialize */
 	ads1256_begin();
 
-	id = ADS1256_ReadChipID();
-	printf("\r\n");
-	printf("ID=\r\n");
- if (id != 3)
- {
-	 printf("Error, ASD1256 Chip ID = 0x%d\r\n", (int)id);
- }
- else
- {
-	 printf("Ok, ASD1256 Chip ID = 0x%d\r\n", (int)id);
- }
-
 	while(1){
 		/* Sensing */
 		while((ADS1256_Scan() == 0));
 
 		/* TEST */
-		for (i = 0; i < ch_num; i++)
-		{
-			adc[i] = ADS1256_GetAdc(i);
-								 volt[i] = (adc[i] * 100) / 167;
-		}
-
-		for (i = 0; i < ch_num; i++)
-		{
-									buf[0] = ((uint32_t)adc[i] >> 16) & 0xFF;
-									buf[1] = ((uint32_t)adc[i] >> 8) & 0xFF;
-									buf[2] = ((uint32_t)adc[i] >> 0) & 0xFF;
-									printf("%d=%02X%02X%02X, %8ld", (int)i, (int)buf[0],
-												 (int)buf[1], (int)buf[2], (long)adc[i]);
-
-									iTemp = volt[i];	/* uV  */
-					if (iTemp < 0)
-					{
-						iTemp = -iTemp;
-														printf(" (-%ld.%03ld %03ld V) \r\n", iTemp /1000000, (iTemp%1000000)/1000, iTemp%1000);
-					}
-					else
-					{
-														printf(" ( %ld.%03ld %03ld V) \r\n", iTemp /1000000, (iTemp%1000000)/1000, iTemp%1000);
-					}
-
-		}
-
 
 		for (i = 0; i < nData; i++)
 		{
