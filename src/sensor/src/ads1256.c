@@ -588,7 +588,6 @@ uint16_t Voltage_Convert(float Vref, float voltage)
 /* Added */
 int ads1256_begin() {
 	if (!bcm2835_init()){
-
 		return 1;
 	}
 	bcm2835_spi_begin();
