@@ -34,6 +34,18 @@ uint8_t buf[3];
 	/* Initialize */
 	ads1256_begin();
 
+	id = ADS1256_ReadChipID();
+	printf("\r\n");
+	printf("ID=\r\n");
+ if (id != 3)
+ {
+	 printf("Error, ASD1256 Chip ID = 0x%d\r\n", (int)id);
+ }
+ else
+ {
+	 printf("Ok, ASD1256 Chip ID = 0x%d\r\n", (int)id);
+ }
+
 	while(1){
 		/* Sensing */
 		while((ADS1256_Scan() == 0));
