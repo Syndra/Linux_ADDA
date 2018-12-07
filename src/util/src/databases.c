@@ -24,7 +24,7 @@ void set_table(char* table_name)
   g_table_name = table_name;
 }
 
-void insert_data(float temp, float alti, float press, float light)
+void insert_data(float temp, float alti, float press, float light, char* datetime)
 {
   MYSQL_RES *res;
 
@@ -35,8 +35,8 @@ void insert_data(float temp, float alti, float press, float light)
 
   char query[255];
 
-  sprintf(query, "INSERT INTO %s (Temp, Light, Press, Alti) VALUES (%d, %d, %d, %d)",
-        g_table_name, temp, alti, press, light);
+  sprintf(query, "INSERT INTO %s (Temp, Light, Press, Alti, Date) VALUES (%d, %d, %d, %d, %s)",
+        g_table_name, temp, alti, press, light, datetime);
 
   if(mysql_query(conn, query))
   {
@@ -51,18 +51,18 @@ void database_deinit()
   conn = NULL;
 }
 
-int main()
-{
-  float a = 1.1;
-
-
-  database_init("localhost", "root", "1111", "4linux");
-  set_table("logs");
-  insert_data(a, a, a, a);
-  database_deinit();
-
-  return 0;
-}
+// int main()
+// {
+//   float a = 1.1;
+//
+//
+//   database_init("localhost", "root", "1111", "4linux");
+//   set_table("logs");
+//   insert_data(a, a, a, a);
+//   database_deinit();
+//
+//   return 0;
+// }
 
 // int main()
 // {
