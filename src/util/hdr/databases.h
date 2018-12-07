@@ -13,4 +13,4 @@ void database_deinit();
 void set_table(char* table_name);
 void insert_data(float temp, float alti, float press, float light);
 
-#endif  __DATABASES_H__
+#endif

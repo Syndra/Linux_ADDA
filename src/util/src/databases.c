@@ -5,10 +5,10 @@
 
 void database_init(char* server, char* user, char* password, char* test)
 {
-  char *server = "localhost";
-  char *user = "root";
-  char *password = "";
-  char *database = "test";
+  // char *server = "localhost";
+  // char *user = "root";
+  // char *password = "";
+  // char *database = "test";
 
 
   conn = mysql_init(NULL);
@@ -19,7 +19,7 @@ void database_init(char* server, char* user, char* password, char* test)
   }
 }
 
-void set_table()
+void set_table(char* table_name)
 {
   g_table_name = table_name;
 }
