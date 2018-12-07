@@ -6,9 +6,15 @@
 #include <monitor.h>
 #include <logger.h>
 #include <sensor_data.h>
+#include <timer.h>
 
 //#define SENSOR_BMP180
 #define SENSOR_ADS1256
+
+void test()
+{
+	puts("Hello, world!\n");
+}
 
 int main(){
 
@@ -33,6 +39,9 @@ uint8_t buf[3];
 
 	/* Initialize */
 	ads1256_begin();
+
+	/* Timer test */
+	run_timer(timer_init(), test, 1, 0, 1000000);
 
 	while(1){
 		/* Sensing */
