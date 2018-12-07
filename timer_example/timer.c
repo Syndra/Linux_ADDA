@@ -55,3 +55,14 @@ void run_timer(timer_t* timerID, void* func, int _sec, int _msec, int _interval)
 	function_register(timerID, func);
 	time_register(timerID, _sec, _msec, _interval);
 }
+
+void test()
+{
+	puts("sdfas");
+}
+
+int main()
+{
+	run_timer(timer_init(), test, 1, 0, 100000);
+	return 0;
+}
