@@ -52,6 +52,6 @@ void time_register(timer_t* timerID, int _sec, int _msec, int _interval){
 
 void run_timer(timer_t* timerID, void* func, int _sec, int _msec, int _interval)
 {
-	function_register(&timerID, func);
-	time_register(&timerID, _sec, _msec, _interval);
+	function_register(timerID, func);
+	time_register(timerID, _sec, _msec, _interval);
 }
