@@ -3,7 +3,7 @@
 #include <mysql.h>
 #include "databases.h"
 
-void database_init(char* server, char* user, char* password, char* test)
+void database_init(char* server, char* user, char* password, char* database)
 {
   // char *server = "localhost";
   // char *user = "root";
