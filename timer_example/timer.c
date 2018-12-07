@@ -7,9 +7,6 @@
 timer_t timer_init(){
 	timer_t timerID;
 
-	function_register(void* function);
-	timer_create(CLOCK_REALTIME, &te, &timerID);
-
 	return timerID;
 }
 
@@ -20,6 +17,7 @@ void function_register(timer_t* timerID, void* function){
 
 	struct sigevent         te;
 	struct sigaction        sa;
+	int                     sigNo = SIGRTMIN;
 
 	sa.sa_flags = SA_SIGINFO;
 	sa.sa_sigaction = function;     // 타이머 호출시 호출할 함수
