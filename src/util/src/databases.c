@@ -51,6 +51,17 @@ void database_deinit()
   conn = NULL;
 }
 
+int main()
+{
+  float a = 1.1;
+
+
+  database_init("localhost", "root", "1111", "4linux");
+  set_table("logs");
+  insert_data(a, a, a, a);
+  database_deinit();
+}
+
 // int main()
 // {
 //         MYSQL *conn;
