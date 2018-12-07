@@ -1,13 +1,13 @@
 #include <time.h>
 #include <stdio.h>
-
+#include <stdlib.h>
 
 char* get_current_time()
 {
 	time_t timer;
 	struct tm* t;
 
-	char *res;
+	char *res = malloc(40*sizeof(char));
 
 	timer = time(NULL); // 현재 시각을 초 단위로 얻기
 
