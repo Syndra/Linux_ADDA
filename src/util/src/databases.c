@@ -60,6 +60,8 @@ int main()
   set_table("logs");
   insert_data(a, a, a, a);
   database_deinit();
+
+  return 0;
 }
 
 // int main()
