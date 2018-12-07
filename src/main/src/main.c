@@ -6,6 +6,9 @@
 #include <monitor.h>
 #include <logger.h>
 #include <sensor_data.h>
+#include <signal.h>
+#include <time.h>
+#include <unistd.h>
 #include <time.h>
 #include <timer.h>
 
