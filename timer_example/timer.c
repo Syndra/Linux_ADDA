@@ -58,6 +58,12 @@ void timer(){
 	puts("Hi");
 }
 
+void run_timer(timer_t* timer, void* func, int _sec, int _msec, int _interval)
+{
+	function_register(&timerID, func);
+	time_register(&timerID, _sec, _msec, _interval);
+}
+
 int main(){
 
 	timer_t timerID = timer_init();
