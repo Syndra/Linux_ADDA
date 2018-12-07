@@ -7,7 +7,7 @@ char* get_current_time()
 	time_t timer;
 	struct tm* t;
 
-	char[40] res;
+	char res[40];
 
 	timer = time(NULL); // 현재 시각을 초 단위로 얻기
 
