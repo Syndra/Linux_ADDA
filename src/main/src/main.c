@@ -45,7 +45,7 @@ uint8_t buf[3];
 	ads1256_begin();
 
 	/* Timer test */
-	run_timer(timer_init(), test, 1, 0, 1000000);
+	run_timer(timer_init(), test, 1, 0, 100000);
 
 	while(1){
 		/* Sensing */
