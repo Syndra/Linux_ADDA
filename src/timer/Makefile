@@ -16,11 +16,9 @@ LD_OPTS    =
 INCLUDES   = -I$(HDR) -I../ -I../../hdr/ -I/util/include -I/util/X11/include
 LIBS       = -lm
 
-SRCS       = $(SRC)/timer.c \
-	     $(SRC)/timer.c
+SRCS       = $(SRC)/timer.c
 
-OBJS       = $(OBJ)/timer.o \
-	     $(OBJ)/timer.o
+OBJS       = $(OBJ)/timer.o
 
 all: $(OBJS) $(SRCS) Makefile
 	ld $(LD_OPTS) -r -o $(LD_OBJ)/timer.o $(OBJS)
