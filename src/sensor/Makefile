@@ -1,4 +1,4 @@
-# Makefile for recursive recognition control 
+# Makefile for recursive recognition control
 
 LD_OBJ     = ../../obj
 BIN        = ./bin
@@ -7,10 +7,10 @@ SRC        = ./src
 HDR        = ./hdr
 
 CC         =  gcc
-DEFINES    =  
+DEFINES    =
 OPT        = -O
 DEBUG_OPT  = -DDEBUG
-CFLAGS     = $(DEFINES) $(OPT) 
+CFLAGS     = $(DEFINES) $(OPT)
 LD_OPTS    =
 
 INCLUDES   = -I$(HDR) -I../ -I../../hdr/ -I/util/include -I/util/X11/include
@@ -24,7 +24,7 @@ OBJS       = $(OBJ)/bmp180.o \
 
 all: $(OBJS) $(SRCS) Makefile
 	ld $(LD_OPTS) -r -o $(LD_OBJ)/sensor.o $(OBJS)
-	cp hdr/*.h ../../hdr
+	cp ./hdr/*.h ../../hdr/
 
 $(OBJ)/%.o:$(SRC)/%.c
 	${CC} ${CFLAGS} $(INCLUDES) -c $(SRC)/${*F}.c -o $(OBJ)/${*F}.o ${LIBS}
@@ -33,4 +33,4 @@ clean:
 	-rm -f *.a core $(OBJS)
 
 depend:
-	makedepend -- $(CFLAGS) $(INCLUDES) -- $(SRCS) 
+	makedepend -- $(CFLAGS) $(INCLUDES) -- $(SRCS)

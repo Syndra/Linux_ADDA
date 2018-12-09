@@ -25,7 +25,7 @@ all: $(OBJS) $(SRCS) Makefile
 
 $(OBJ)/%.o:$(SRC)/%.c
 	${CC} ${CFLAGS} $(INCLUDES) -c $(SRC)/${*F}.c -o $(OBJ)/${*F}.o
-	cp hdr/*.h ../../hdr/
+	cp ./hdr/*.h ../../hdr/
 
 clean:
 	-rm -f *.a core $(OBJS)

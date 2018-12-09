@@ -24,7 +24,7 @@ OBJS       = $(OBJ)/sensor_data.o \
 
 all: $(OBJS) $(SRCS) Makefile
 	ld $(LD_OPTS) -r -o $(LD_OBJ)/util.o $(OBJS)
-	cp hdr/*.h ../../hdr/
+	cp ./hdr/*.h ../../hdr/
 
 $(OBJ)/%.o:$(SRC)/%.c
 	${CC} ${CFLAGS} $(INCLUDES) -c $(SRC)/${*F}.c -o $(OBJ)/${*F}.o ${LIBS}
