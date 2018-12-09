@@ -12,11 +12,11 @@ void alarm_init(int buzzerpin, int buttonpin){
   pinMode (buttonpin, INPUT) ;
 }
 void alarm_on(){
-  digitalWrite(buzzerpin, HIGH);
+  digitalWrite(g_buzzerpin, HIGH);
 }
 void alarm_off(){
-  if(digitalRead(buttonpin) == HIGH)
-      digitalWrite(buzzerpin, LOW);
+  if(digitalRead(g_buttonpin) == HIGH)
+      digitalWrite(g_buzzerpin, LOW);
 }
 
 int main()
