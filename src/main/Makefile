@@ -1,4 +1,4 @@
-# Makefile for recursive recognition control 
+# Makefile for recursive recognition control
 
 LD_OBJ     = ../../obj
 BIN        = ./bin
@@ -7,14 +7,14 @@ SRC        = ./src
 HDR        = ./hdr
 
 CC         =  gcc
-DEFINES    =  
+DEFINES    =
 OPT        = -O
 DEBUG_OPT  = -DDEBUG
-CFLAGS     = $(DEFINES) $(OPT) 
+CFLAGS     = $(DEFINES) $(OPT)
 LD_OPTS    =
 
 INCLUDES   = -I$(HDR) -I../ -I../../hdr/ -I/util/include -I/util/X11/include
-LIBS       = -lm -lbcm2835
+LIBS       = -lm -lbcm2835 -lrt
 
 SRCS       = $(SRC)/main.c
 
@@ -30,4 +30,4 @@ clean:
 	-rm -f *.a core $(OBJS)
 
 depend:
-	makedepend -- $(CFLAGS) $(INCLUDES) -- $(SRCS) 
+	makedepend -- $(CFLAGS) $(INCLUDES) -- $(SRCS)
