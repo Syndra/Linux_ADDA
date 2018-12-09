@@ -11,7 +11,7 @@ LD_OPT       =
 
 LIB_PATH     = .
 
-LIBS         = -L$(LIB_PATH) -lm -lbcm2835 -lwiringPi
+LIBS         = -L$(LIB_PATH) -lm -lbcm2835 -lwiringPi -lrt
 
 SRC          = ./src
 OBJ          = ./obj
