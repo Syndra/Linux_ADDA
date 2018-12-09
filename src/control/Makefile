@@ -22,10 +22,10 @@ OBJS       = $(OBJ)/pushalarm.o
 
 all: $(OBJS) $(SRCS) Makefile
 	ld $(LD_OPTS) -r -o $(LD_OBJ)/pushalarm.o $(OBJS)
+	cp ./hdr/*.h ../../hdr/
 
 $(OBJ)/%.o:$(SRC)/%.c
 	${CC} ${CFLAGS} $(INCLUDES) -c $(SRC)/${*F}.c -o $(OBJ)/${*F}.o
-	cp ./hdr/*.h ../../hdr/
 
 clean:
 	-rm -f *.a core $(OBJS)
