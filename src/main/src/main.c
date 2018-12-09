@@ -24,6 +24,12 @@ void test()
 	puts("Hello, world!\n");
 }
 
+void alarm_off_main()
+{
+	int a = alarm_off();
+	printf("%d\n", a);
+}
+
 int main(){
 
 	uint8_t id;
@@ -51,7 +57,7 @@ int main(){
 	/* Timer test */
 	alarm_init(BUZZER_PIN, BUTTON_PIN);
 	alarm_on();
-	run_timer(timer_init(), alarm_off, 1, 0, 10000);
+	run_timer(timer_init(), alarm_off_main, 1, 0, 10000);
 	run_timer(timer_init(), test, 1, 0, 100000);
 
 	while(1){
