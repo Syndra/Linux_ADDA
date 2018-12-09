@@ -23,13 +23,3 @@ int alarm_off(){
     }
     return 0;
 }
-
-int main()
-{
-  alarm_init(29, 28);
-  alarm_on();
-
-  while(!alarm_off());
-
-  return 0;
-}
