@@ -21,7 +21,7 @@ void alarm_off(){
 
 int main()
 {
-  alarm_init(15, 16);
+  alarm_init(29, 28);
   alarm_on();
 
   while(1){
