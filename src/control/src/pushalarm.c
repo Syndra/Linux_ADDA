@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <wiringPi.h>
+#include "pushalarm.h"
 
 void alarm_init(int buzzerpin, int buttonpin){
 
