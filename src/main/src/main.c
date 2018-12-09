@@ -58,7 +58,7 @@ int main(){
 	alarm_init(BUZZER_PIN, BUTTON_PIN);
 	alarm_on();
 	run_timer(timer_init(), alarm_off_main, 1, 0, 10000);
-	run_timer(timer_init(), test, 1, 0, 100000);
+	//run_timer(timer_init(), test, 1, 0, 100000);
 
 	while(1){
 		/* Sensing */
