@@ -19,12 +19,14 @@
 #define BUZZER_PIN 29
 #define BUTTON_PIN 28
 
+
+
 void test()
 {
 	puts("Hello, world!\n");
 }
 
-void alarm_off_main()
+void timer_routine()
 {
 	int a = alarm_off();
 	printf("%d\n", a);
@@ -53,23 +55,21 @@ int main(){
 
 	/* Initialize */
 	ads1256_begin();
-
-	/* Timer test */
 	alarm_init(BUZZER_PIN, BUTTON_PIN);
-	alarm_on();
-	run_timer(timer_init(), alarm_off_main, 1, 0, 10000);
+	/* Timer test */
+
+	run_timer(timer_init(), timer_routine, 1, 0, 10000);
 	//run_timer(timer_init(), test, 1, 0, 100000);
 
 	while(1){
 		/* Sensing */
 		while((ADS1256_Scan() == 0));
 
-		/* TEST */
+		/* Set sensor data */
 
-		for (i = 0; i < nData; i++)
-		{
-			sensor_data_set(data[i], "???", SENSOR_DATA_TYPE_DOUBLE, ADS1256_GetAdc(i) /1670.0, "mV");
-		}
+		sensor_data_set(data[0], "???", SENSOR_DATA_TYPE_DOUBLE, ADS1256_GetAdc(0) /1670.0, "mV");
+		sensor_data_set(data[1], "???", SENSOR_DATA_TYPE_DOUBLE, ADS1256_GetAdc(1) /1670.0, "Lumen");
+		sensor_data_set(data[2], "???", SENSOR_DATA_TYPE_DOUBLE, (ADS1256_GetAdc(2) * 5000 / 1024) - 500, "'c'");
 
 		/* Monitor */
 		monitor(data, nData);
