@@ -16,6 +16,8 @@
 
 //#define SENSOR_BMP180
 #define SENSOR_ADS1256
+#define BUZZER_PIN 29
+#define BUTTON_PIN 28
 
 void test()
 {
@@ -25,17 +27,17 @@ void test()
 int main(){
 
 	uint8_t id;
-int32_t adc[8];
-int32_t volt[8];
-uint8_t ch_num = 8;
-int32_t iTemp;
-uint8_t buf[3];
+	int32_t adc[8];
+	int32_t volt[8];
+	uint8_t ch_num = 8;
+	int32_t iTemp;
+	uint8_t buf[3];
 
 	int i = 0;
 	int result = 0;
 
 	/* Data Storage Preparation */
-	int nData = 2;
+	int nData = 3;
 	sensor_data **data = NULL;
 	data = (sensor_data *)malloc(sizeof(sensor_data*) * nData);
 
@@ -47,6 +49,9 @@ uint8_t buf[3];
 	ads1256_begin();
 
 	/* Timer test */
+	alarm_init(BUZZER_PIN, BUTTON_PIN);
+	alarm_on();
+	run_timer(timer_init(), alarm_off, 1, 0, 10000);
 	run_timer(timer_init(), test, 1, 0, 100000);
 
 	while(1){
