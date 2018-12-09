@@ -19,7 +19,8 @@
 #define BUZZER_PIN 29
 #define BUTTON_PIN 28
 
-
+double cur_light = 0;
+double cur_temp = 0;
 
 void test()
 {
@@ -29,7 +30,7 @@ void test()
 void timer_routine()
 {
 	int a = alarm_off();
-	printf("%d\n", a);
+	printf("%f : %f \n", cur_light, cur_temp);
 }
 
 int main(){
@@ -67,9 +68,12 @@ int main(){
 
 		/* Set sensor data */
 
-		sensor_data_set(data[0], "???", SENSOR_DATA_TYPE_DOUBLE, ADS1256_GetAdc(0) /1670.0, "mV");
-		sensor_data_set(data[1], "???", SENSOR_DATA_TYPE_DOUBLE, ADS1256_GetAdc(1) /1670.0, "Lm");
-		sensor_data_set(data[2], "???", SENSOR_DATA_TYPE_DOUBLE, ADS1256_GetAdc(2), "'C");
+		sensor_data_set(data[0], "Round", SENSOR_DATA_TYPE_DOUBLE, ADS1256_GetAdc(0) /1670.0, "mV");
+		sensor_data_set(data[1], "Light", SENSOR_DATA_TYPE_DOUBLE, ADS1256_GetAdc(1) /1670.0, "Lm");
+		sensor_data_set(data[2], "Temp", SENSOR_DATA_TYPE_DOUBLE, ADS1256_GetAdc(2), "'C");
+
+		cur_light = sensor_data_get_value(data[1]);
+		cur_temp = sensor_data_get_value(data[2]);
 
 		/* Monitor */
 		monitor(data, nData);
