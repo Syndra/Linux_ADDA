@@ -21,7 +21,7 @@ SRCS       = $(SRC)/pushalarm.c
 OBJS       = $(OBJ)/pushalarm.o
 
 all: $(OBJS) $(SRCS) Makefile
-	ld $(LD_OPTS) -r -o $(LD_OBJ)/control.o $(OBJS)
+	ld $(LD_OPTS) -r -o $(LD_OBJ)/pushalarm.o $(OBJS)
 
 $(OBJ)/%.o:$(SRC)/%.c
 	${CC} ${CFLAGS} $(INCLUDES) -c $(SRC)/${*F}.c -o $(OBJ)/${*F}.o
