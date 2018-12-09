@@ -34,10 +34,3 @@ char* get_current_time()
 
 	return res;
 }
-
-int main()
-{
-	char* res = get_current_time();
-
-	printf("%s", res);
-}
