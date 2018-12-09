@@ -16,7 +16,7 @@ void alarm_on(){
   printf("on\n");
 }
 int alarm_off(){
-  if(digitalRead(g_buttonpin) == HIGH){
+  if(digitalRead(g_buttonpin) == LOW){
       digitalWrite(g_buzzerpin, LOW);
       printf("off\n");
       return 1;
