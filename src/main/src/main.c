@@ -69,7 +69,7 @@ int main(){
 
 		sensor_data_set(data[0], "???", SENSOR_DATA_TYPE_DOUBLE, ADS1256_GetAdc(0) /1670.0, "mV");
 		sensor_data_set(data[1], "???", SENSOR_DATA_TYPE_DOUBLE, ADS1256_GetAdc(1) /1670.0, "Lm");
-		sensor_data_set(data[2], "???", SENSOR_DATA_TYPE_DOUBLE, ADS1256_GetAdc(2) /1670.0, "'C");
+		sensor_data_set(data[2], "???", SENSOR_DATA_TYPE_DOUBLE, (ADS1256_GetAdc(2) /1670.0 - 500) / 10, "'C");
 
 		/* Monitor */
 		monitor(data, nData);
