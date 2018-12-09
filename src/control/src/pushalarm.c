@@ -13,10 +13,15 @@ void alarm_init(int buzzerpin, int buttonpin){
 }
 void alarm_on(){
   digitalWrite(g_buzzerpin, HIGH);
+  printf("on\n");
 }
-void alarm_off(){
-  if(digitalRead(g_buttonpin) == HIGH)
+int alarm_off(){
+  if(digitalRead(g_buttonpin) == HIGH){
       digitalWrite(g_buzzerpin, LOW);
+      printf("off\n");
+      return 1;
+    }
+    return 0;
 }
 
 int main()
@@ -24,9 +29,7 @@ int main()
   alarm_init(29, 28);
   alarm_on();
 
-  while(1){
-    alarm_off();
-  }
+  while(!alarm_off());
 
   return 0;
 }

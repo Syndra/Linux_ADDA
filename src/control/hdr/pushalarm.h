@@ -6,6 +6,6 @@ int g_buttonpin;
 
 void alarm_init(int buzzerpin, int buttonpin);
 void alarm_on();
-void alarm_off();
+int alarm_off();
 
 #endif
