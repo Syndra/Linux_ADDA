@@ -29,7 +29,7 @@ TIMER		= $(SRC)/timer
 full: Makefile $(SRCS)
 	(cd $(UTIL); $(MAKE) "CC=$(CC)" "CFLAGS = $(CFLAGS)")
 	(cd $(SENSOR); $(MAKE) "CC=$(CC)" "CFLAGS = $(CFLAGS)")
-	#(cd $(CONTROL); $(MAKE) "CC=$(CC)" "CFLAGS = $(CFLAGS)")
+	(cd $(CONTROL); $(MAKE) "CC=$(CC)" "CFLAGS = $(CFLAGS)")
 	(cd $(MONITOR); $(MAKE) "CC=$(CC)" "CFLAGS = $(CFLAGS)")
 	(cd $(LOGGER); $(MAKE) "CC=$(CC)" "CFLAGS = $(CFLAGS)")
 	(cd $(TIMER); $(MAKE) "CC=$(CC)" "CFLAGS = $(CFLAGS)")
