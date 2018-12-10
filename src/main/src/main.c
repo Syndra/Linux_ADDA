@@ -54,7 +54,9 @@ void timer_routine()
 
 	/* DataBases go */
 	printf("come!\n");
-	insert_data(cur_temp, cur_alti, cur_press, cur_light, get_DATETIME_format());
+	char *res = malloc(30*sizeof(char));
+	res = get_DATETIME_format();
+	insert_data(cur_temp, cur_alti, cur_press, cur_light, res;
 }
 
 int main(){
