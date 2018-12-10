@@ -18,11 +18,16 @@
 #define SENSOR_ADS1256
 #define BUZZER_PIN 29
 #define BUTTON_PIN 28
+#define THREADSHOLD 10
+#define DET_MORNING 300
 
 double cur_light = 0;
 double cur_temp = 0;
 double cur_alti = 0;
 double cur_press = 0;
+
+int threadshold = 0;
+int alarmRun = 0;
 
 struct tm* cur_time;
 
@@ -42,6 +47,23 @@ char* get_DATETIME_format()
 
 void timer_routine()
 {
+	char *res = malloc(30*sizeof(char));
+	res = get_DATETIME_format();
+
+	threadshold++;
+	if(threadshold > THREADSHOLD) {
+		if(cur_light < DET_MORNING){
+			alarm_on();
+			alarmRun = 1;
+		}
+	}
+
+	if(alarmRun == 1){
+		alarm_off();
+		set_table("wakeuplog");
+		insert_data(cur_temp, cur_alti, cur_press, cur_light, res);
+		alarmRun = 0;
+	}
 	//int a = alarm_off();
 	//printf("%f : %f \n", cur_light, cur_temp);
 
@@ -49,13 +71,13 @@ void timer_routine()
 	//do alarm once
 
 
-
 	/* if button pushed */
+	// set_table("wakeuplog");
+	// insert_data(cur_temp, cur_alti, cur_press, cur_light, res);
 
 	/* DataBases go */
-	char *res = malloc(30*sizeof(char));
-	res = get_DATETIME_format();
 	//printf("%f-%f-%f-%f %s", cur_temp, cur_alti, cur_press, cur_light, res);
+	set_table("logs");
 	insert_data(cur_temp, cur_alti, cur_press, cur_light, res);
 }
 
