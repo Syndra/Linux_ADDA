@@ -32,7 +32,7 @@ int alarmRun = 0;
 int onNight = 1;
 
 struct tm* cur_time;
-struct tm* alarmonTime;
+struct char* alarmonTime;
 
 char* get_DATETIME_format()
 {
@@ -48,19 +48,19 @@ char* get_DATETIME_format()
 	return res;
 }
 
-char* get_DATETIME_format_wake()
-{
-	char* res = malloc(30*sizeof(char));
-	sprintf(res,"%d-%d-%d %d:%d:%d",
-  alarmonTime->tm_year+1900,
-  alarmonTime->tm_mon+1,
-	alarmonTime->tm_mday,
-	alarmonTime->tm_hour,
-	alarmonTime->tm_min,
-	alarmonTime->tm_sec);
-
-	return res;
-}
+// char* get_DATETIME_format_wake()
+// {
+// 	char* res = malloc(30*sizeof(char));
+// 	sprintf(res,"%d-%d-%d %d:%d:%d",
+//   alarmonTime->tm_year+1900,
+//   alarmonTime->tm_mon+1,
+// 	alarmonTime->tm_mday,
+// 	alarmonTime->tm_hour,
+// 	alarmonTime->tm_min,
+// 	alarmonTime->tm_sec);
+//
+// 	return res;
+// }
 
 void timer_routine()
 {
@@ -74,16 +74,16 @@ void timer_routine()
 			alarm_on();
 			alarmRun = 1;
 			onNight = 0;
-			alarmonTime = get_current_time();
+			alarmonTime = get_DATETIME_format();
 		}
 	}
 
 	if(alarmRun == 1){
 		if(alarm_off() == 1)
 		{
-			alarmres = get_DATETIME_format_wake();
+			//alarmres = get_DATETIME_format_wake();
 			set_table("wakeuplog");
-			insert_data_wake(cur_temp, cur_alti, cur_press, cur_light, alarmres, res);
+			insert_data_wake(cur_temp, cur_alti, cur_press, cur_light, alarmonTime, res);
 			alarmRun = 0;
 		}
 	}
@@ -124,6 +124,7 @@ int main(){
 	int nData = 5;
 	sensor_data **data = NULL;
 	data = (sensor_data *)malloc(sizeof(sensor_data*) * nData);
+	alarmonTime = malloc(40*sizeof(char));
 
 	for(i = 0 ; i < nData ; i++) {
 		data[i] = sensor_data_init();
