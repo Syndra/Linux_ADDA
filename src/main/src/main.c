@@ -26,6 +26,7 @@ double cur_light = 0;
 double cur_temp = 0;
 double cur_alti = 0;
 double cur_press = 0;
+double cur_round = 0;
 
 int threadshold = 0;
 int alarmRun = 0;
@@ -88,7 +89,7 @@ void timer_routine()
 		}
 	}
 
-	if(cur_light > DET_NIGHT) {
+	if(cur_light > cur_round) {
 		onNight = 1;
 	}
 	//int a = alarm_off();
@@ -152,6 +153,7 @@ int main(){
 		sensor_data_set(data[3], "Alti", SENSOR_DATA_TYPE_DOUBLE, ADS1256_GetAdc(3) /1670.0, "h");
 		sensor_data_set(data[4], "Press", SENSOR_DATA_TYPE_DOUBLE, ADS1256_GetAdc(4) /1670.0, "Pa");
 
+		cur_round = sensor_data_get_value(data[0]);
 		cur_light = sensor_data_get_value(data[1]);
 		cur_temp = sensor_data_get_value(data[2]);
 		cur_alti = sensor_data_get_value(data[3]);
