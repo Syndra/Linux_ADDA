@@ -91,7 +91,7 @@ int main(){
 
 		/* Get Datetime */
 		struct tm* datetm = get_current_time();
-		char* timestamp_file;
+		char* timestamp_file = malloc(40*sizeof(char));
 		sprintf(timestamp_file, "data/%d_%d_%d_log.dat", datetm->tm_year+1900, datetm->tm_mon+1, datetm->tm_mday);
 		printf("%s\n", timestamp_file);
 
