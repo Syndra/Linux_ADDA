@@ -21,6 +21,7 @@
 
 double cur_light = 0;
 double cur_temp = 0;
+struct tm* cur_time;
 
 void test()
 {
@@ -89,8 +90,8 @@ int main(){
 		fprintf(stdout, "\n");
 
 		/* Get Datetime */
-		char* datestr = get_current_time();
-		printf("%s", datestr);
+		struct tm* datetm = get_current_time();
+		printf("%d\n", datetm->tm_year);
 
 		/* Logging */
 		result = logging("data/data_corpus.dat", data, nData);
