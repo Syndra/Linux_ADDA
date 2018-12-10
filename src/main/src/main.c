@@ -72,7 +72,7 @@ int main(){
 	run_timer(timer_init(), timer_routine, 1, 0, 10000);
 	//run_timer(timer_init(), test, 1, 0, 100000);
 
-	run_timer(timer_init(), alarm_on, 10, 0, 100000)
+	run_timer(timer_init(), alarm_on, 10, 0, 100000);
 
 	while(1){
 		/* Sensing */
