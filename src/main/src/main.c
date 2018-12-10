@@ -23,11 +23,6 @@ double cur_light = 0;
 double cur_temp = 0;
 struct tm* cur_time;
 
-void test()
-{
-	puts("Hello, world!\n");
-}
-
 void timer_routine()
 {
 	//int a = alarm_off();
@@ -67,10 +62,9 @@ int main(){
 	/* Initialize */
 	ads1256_begin();
 	alarm_init(BUZZER_PIN, BUTTON_PIN);
-	/* Timer test */
 
+	/* Timer function start */
 	run_timer(timer_init(), timer_routine, 1, 0, 10000);
-	//run_timer(timer_init(), test, 1, 0, 100000);
 
 	while(1){
 		/* Sensing */
@@ -80,7 +74,7 @@ int main(){
 
 		sensor_data_set(data[0], "Round", SENSOR_DATA_TYPE_DOUBLE, ADS1256_GetAdc(0) /1670.0, "mV");
 		sensor_data_set(data[1], "Light", SENSOR_DATA_TYPE_DOUBLE, ADS1256_GetAdc(1) /1670.0, "Lm");
-		sensor_data_set(data[2], "Temp", SENSOR_DATA_TYPE_DOUBLE, ADS1256_GetAdc(2), "'C");
+		sensor_data_set(data[2], "Temp", SENSOR_DATA_TYPE_DOUBLE, (ADS1256_GetAdc(2) * (-11.0) )/ 42594.0 + (28423142.0 / 106485.0), "'C");
 
 		cur_light = sensor_data_get_value(data[1]);
 		cur_temp = sensor_data_get_value(data[2]);
@@ -90,9 +84,9 @@ int main(){
 		fprintf(stdout, "\n");
 
 		/* Get Datetime */
-		struct tm* datetm = get_current_time();
+		cur_time = get_current_time();
 		char* timestamp_file = malloc(40*sizeof(char));
-		sprintf(timestamp_file, "data/%d_%d_%d_log.dat", datetm->tm_year+1900, datetm->tm_mon+1, datetm->tm_mday);
+		sprintf(timestamp_file, "data/%d_%d_%d_log.dat", cur_time->tm_year+1900, cur_time->tm_mon+1, cur_time->tm_mday);
 		printf("%s\n", timestamp_file);
 
 		/* Logging */
