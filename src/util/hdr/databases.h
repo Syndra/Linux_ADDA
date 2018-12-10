@@ -12,5 +12,6 @@ void database_init(char* server, char* user, char* password, char* database);
 void database_deinit();
 void set_table(char* table_name);
 void insert_data(float temp, float alti, float press, float light, char* datetime);
+void insert_data_wake(float temp, float alti, float press, float light, char* alarmtime, char* waketime);
 
 #endif

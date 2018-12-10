@@ -32,6 +32,7 @@ int alarmRun = 0;
 int onNight = 1;
 
 struct tm* cur_time;
+struct tm* alarmonTime;
 
 char* get_DATETIME_format()
 {
@@ -47,9 +48,24 @@ char* get_DATETIME_format()
 	return res;
 }
 
+char* get_DATETIME_format_wake()
+{
+	char* res = malloc(30*sizeof(char));
+	sprintf(res,"%d-%d-%d %d:%d:%d",
+  alarmonTime->tm_year+1900,
+  alarmonTime->tm_mon+1,
+	alarmonTime->tm_mday,
+	alarmonTime->tm_hour,
+	alarmonTime->tm_min,
+	alarmonTime->tm_sec);
+
+	return res;
+}
+
 void timer_routine()
 {
 	char *res = malloc(30*sizeof(char));
+	char *alarmres = malloc(30*sizeof(char));
 	res = get_DATETIME_format();
 
 	threadshold++;
@@ -58,14 +74,16 @@ void timer_routine()
 			alarm_on();
 			alarmRun = 1;
 			onNight = 0;
+			alarmonTime = get_current_time();
 		}
 	}
 
 	if(alarmRun == 1){
 		if(alarm_off() == 1)
 		{
+			alarmres = get_DATETIME_format_wake();
 			set_table("wakeuplog");
-			insert_data(cur_temp, cur_alti, cur_press, cur_light, res);
+			insert_data_wake(cur_temp, cur_alti, cur_press, cur_light, alarmres, res);
 			alarmRun = 0;
 		}
 	}
