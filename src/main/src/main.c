@@ -32,7 +32,7 @@ int alarmRun = 0;
 int onNight = 1;
 
 struct tm* cur_time;
-struct char* alarmonTime;
+char* alarmonTime;
 
 char* get_DATETIME_format()
 {
