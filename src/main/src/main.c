@@ -21,7 +21,24 @@
 
 double cur_light = 0;
 double cur_temp = 0;
+double cur_alti = 0;
+double cur_press = 0;
+
 struct tm* cur_time;
+
+char* get_DATETIME_format()
+{
+	char* res = malloc(30*sizeof(char));
+	sprintf(res,"%d-%d-%d %d:%d:%d",
+  cur_time->tm_year+1900,
+  cur_time->tm_mon+1,
+	cur_time->tm_mday,
+	cur_time->tm_hour,
+	cur_time->tm_min,
+	cur_time->tm_sec);
+
+	return res;
+}
 
 void timer_routine()
 {
@@ -36,6 +53,7 @@ void timer_routine()
 	/* if button pushed */
 
 	/* DataBases go */
+	insert_data(cur_temp, cur_alti, cur_press, cur_light, get_DATETIME_format());
 }
 
 int main(){
@@ -51,7 +69,7 @@ int main(){
 	int result = 0;
 
 	/* Data Storage Preparation */
-	int nData = 3;
+	int nData = 5;
 	sensor_data **data = NULL;
 	data = (sensor_data *)malloc(sizeof(sensor_data*) * nData);
 
@@ -62,6 +80,9 @@ int main(){
 	/* Initialize */
 	ads1256_begin();
 	alarm_init(BUZZER_PIN, BUTTON_PIN);
+	database_init("localhost", "root", "1111", "4linux");
+	set_table("logs");
+	cur_time = get_current_time();
 
 	/* Timer function start */
 	run_timer(timer_init(), timer_routine, 1, 0, 10000);
@@ -75,9 +96,13 @@ int main(){
 		sensor_data_set(data[0], "Round", SENSOR_DATA_TYPE_DOUBLE, ADS1256_GetAdc(0) /1670.0, "mV");
 		sensor_data_set(data[1], "Light", SENSOR_DATA_TYPE_DOUBLE, ADS1256_GetAdc(1) /1670.0, "Lm");
 		sensor_data_set(data[2], "Temp", SENSOR_DATA_TYPE_DOUBLE, (ADS1256_GetAdc(2) * (-11.0) )/ 42594.0 + (28423142.0 / 106485.0), "'C");
+		sensor_data_set(data[3], "Alti", SENSOR_DATA_TYPE_DOUBLE, ADS1256_GetAdc(3) /1670.0, "h");
+		sensor_data_set(data[4], "Press", SENSOR_DATA_TYPE_DOUBLE, ADS1256_GetAdc(4) /1670.0, "Pa");
 
 		cur_light = sensor_data_get_value(data[1]);
 		cur_temp = sensor_data_get_value(data[2]);
+		cur_alti = sensor_data_get_value(data[3]);
+		cur_press = sensor_data_get_value(data[4]);
 
 		/* Monitor */
 		monitor(data, nData);
@@ -87,10 +112,9 @@ int main(){
 		cur_time = get_current_time();
 		char* timestamp_file = malloc(40*sizeof(char));
 		sprintf(timestamp_file, "data/%d_%d_%d_log.dat", cur_time->tm_year+1900, cur_time->tm_mon+1, cur_time->tm_mday);
-		printf("%s\n", timestamp_file);
 
 		/* Logging */
-		result = logging("data/data_corpus.dat", data, nData);
+		result = logging(timestamp_file, data, nData);
 		if(result) {
 			fprintf(stderr, "File is not written.\n");
 			return 1;
