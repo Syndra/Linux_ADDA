@@ -56,7 +56,7 @@ void timer_routine()
 	printf("come!\n");
 	char *res = malloc(30*sizeof(char));
 	res = get_DATETIME_format();
-	insert_data(cur_temp, cur_alti, cur_press, cur_light, res;
+	insert_data(cur_temp, cur_alti, cur_press, cur_light, res);
 }
 
 int main(){
