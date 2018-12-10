@@ -91,7 +91,9 @@ int main(){
 
 		/* Get Datetime */
 		struct tm* datetm = get_current_time();
-		printf("%d\n", datetm->tm_year);
+		char* timestamp_file;
+		sprintf(timestamp_file, "data/%d_%d_%d_log.dat", datetm->tm_year+1900, datetm->tm_mon+1, datetm->tm_mday);
+		printf("%s\n", timestamp_file);
 
 		/* Logging */
 		result = logging("data/data_corpus.dat", data, nData);
