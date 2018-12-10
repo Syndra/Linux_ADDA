@@ -29,8 +29,8 @@ void test()
 
 void timer_routine()
 {
-	int a = alarm_off();
-	printf("%f : %f \n", cur_light, cur_temp);
+	//int a = alarm_off();
+	//printf("%f : %f \n", cur_light, cur_temp);
 
 	//if light is once
 	//do alarm once
@@ -68,11 +68,8 @@ int main(){
 	alarm_init(BUZZER_PIN, BUTTON_PIN);
 	/* Timer test */
 
-	alarm_on();
 	run_timer(timer_init(), timer_routine, 1, 0, 10000);
 	//run_timer(timer_init(), test, 1, 0, 100000);
-
-	run_timer(timer_init(), alarm_on, 10, 0, 100000);
 
 	while(1){
 		/* Sensing */
@@ -90,6 +87,10 @@ int main(){
 		/* Monitor */
 		monitor(data, nData);
 		fprintf(stdout, "\n");
+
+		/* Get Datetime */
+		char* datestr = get_current_time();
+		printf("%s", datestr);
 
 		/* Logging */
 		result = logging("data/data_corpus.dat", data, nData);
