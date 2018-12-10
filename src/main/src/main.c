@@ -53,6 +53,7 @@ void timer_routine()
 	/* if button pushed */
 
 	/* DataBases go */
+	printf("come!\n");
 	insert_data(cur_temp, cur_alti, cur_press, cur_light, get_DATETIME_format());
 }
 
