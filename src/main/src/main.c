@@ -31,6 +31,15 @@ void timer_routine()
 {
 	int a = alarm_off();
 	printf("%f : %f \n", cur_light, cur_temp);
+
+	//if light is once
+	//do alarm once
+
+
+
+	/* if button pushed */
+
+	/* DataBases go */
 }
 
 int main(){
@@ -59,6 +68,7 @@ int main(){
 	alarm_init(BUZZER_PIN, BUTTON_PIN);
 	/* Timer test */
 
+	alarm_on();
 	run_timer(timer_init(), timer_routine, 1, 0, 10000);
 	//run_timer(timer_init(), test, 1, 0, 100000);
 
