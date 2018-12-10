@@ -20,6 +20,7 @@
 #define BUTTON_PIN 28
 #define THREADSHOLD 10
 #define DET_MORNING 300
+#define DET_NIGHT 2500
 
 double cur_light = 0;
 double cur_temp = 0;
@@ -28,6 +29,7 @@ double cur_press = 0;
 
 int threadshold = 0;
 int alarmRun = 0;
+int onNight = 1;
 
 struct tm* cur_time;
 
@@ -51,18 +53,25 @@ void timer_routine()
 	res = get_DATETIME_format();
 
 	threadshold++;
-	if(threadshold > THREADSHOLD) {
+	if(threadshold > THREADSHOLD && onNight == 1) {
 		if(cur_light < DET_MORNING){
 			alarm_on();
 			alarmRun = 1;
+			onNight = 0;
 		}
 	}
 
 	if(alarmRun == 1){
-		alarm_off();
-		set_table("wakeuplog");
-		insert_data(cur_temp, cur_alti, cur_press, cur_light, res);
-		alarmRun = 0;
+		if(alarm_off() == 1)
+		{
+			set_table("wakeuplog");
+			insert_data(cur_temp, cur_alti, cur_press, cur_light, res);
+			alarmRun = 0;
+		}
+	}
+
+	if(cur_light > DET_NIGHT) {
+		onNight = 1;
 	}
 	//int a = alarm_off();
 	//printf("%f : %f \n", cur_light, cur_temp);
