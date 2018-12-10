@@ -28,15 +28,17 @@ void insert_data(float temp, float alti, float press, float light, char* datetim
 {
   MYSQL_RES *res;
 
-  int _temp = (int)temp*1000;
-  int _alti = (int)alti*1000;
-  int _press = (int)press*1000;
-  int _light = (int)light*1000;
+  double _temp = temp;
+  double _alti = alti;
+  double _press = press;
+  double _light = light;
 
   char query[255];
 
-  sprintf(query, "INSERT INTO %s (Temp, Light, Press, Alti, Date) VALUES (%d, %d, %d, %d, %s)",
+  sprintf(query, "INSERT INTO %s (Temp, Light, Press, Alti, Date) VALUES (%f, %f, %f, %f, %s)",
         g_table_name, temp, alti, press, light, datetime);
+
+  printf("%s", query);
 
   if(mysql_query(conn, query))
   {
