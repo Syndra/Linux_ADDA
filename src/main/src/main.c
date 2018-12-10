@@ -14,13 +14,11 @@
 #include <pushalarm.h>
 #include <databases.h>
 
-//#define SENSOR_BMP180
 #define SENSOR_ADS1256
 #define BUZZER_PIN 29
 #define BUTTON_PIN 28
 #define THREADSHOLD 10
 #define DET_MORNING 300
-#define DET_NIGHT 2500
 
 double cur_light = 0;
 double cur_temp = 0;
@@ -49,20 +47,6 @@ char* get_DATETIME_format()
 	return res;
 }
 
-// char* get_DATETIME_format_wake()
-// {
-// 	char* res = malloc(30*sizeof(char));
-// 	sprintf(res,"%d-%d-%d %d:%d:%d",
-//   alarmonTime->tm_year+1900,
-//   alarmonTime->tm_mon+1,
-// 	alarmonTime->tm_mday,
-// 	alarmonTime->tm_hour,
-// 	alarmonTime->tm_min,
-// 	alarmonTime->tm_sec);
-//
-// 	return res;
-// }
-
 void timer_routine()
 {
 	char *res = malloc(30*sizeof(char));
@@ -82,7 +66,6 @@ void timer_routine()
 	if(alarmRun == 1){
 		if(alarm_off() == 1)
 		{
-			//alarmres = get_DATETIME_format_wake();
 			set_table("wakeuplog");
 			insert_data_wake(cur_temp, cur_alti, cur_press, cur_light, alarmonTime, res);
 			alarmRun = 0;
@@ -92,19 +75,6 @@ void timer_routine()
 	if(cur_light > cur_round) {
 		onNight = 1;
 	}
-	//int a = alarm_off();
-	//printf("%f : %f \n", cur_light, cur_temp);
-
-	//if light is once
-	//do alarm once
-
-
-	/* if button pushed */
-	// set_table("wakeuplog");
-	// insert_data(cur_temp, cur_alti, cur_press, cur_light, res);
-
-	/* DataBases go */
-	//printf("%f-%f-%f-%f %s", cur_temp, cur_alti, cur_press, cur_light, res);
 	set_table("logs");
 	insert_data(cur_temp, cur_alti, cur_press, cur_light, res);
 }
