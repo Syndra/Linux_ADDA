@@ -123,9 +123,11 @@ function search_op_avg(request, response)
   {
     data = qs.parse(Buffer.concat(chunks).toString());
     var connection = mysql_load();
+    console.log(data);
     connection.query('SELECT sec_to_time(Alarmoff - Alarmon) as AVG FROM wakeuplog where (Alarmon > ? or Alarmon < ?) and (Temp > ? or Temp < ?) and (Light > ? or Light < ?) and (Alti > ? or Alti < ?) and (Press > ? or Press < ?)',
     [data.starttime, data.endtime, data.starttemp, data.endtemp, data.startlight, data.endlight, data.startalti, data.endalti, data.startpress, data.endpress],
     function(err, results){
+      console.log(results);
       if(err)
         console.log(err);
       else{
