@@ -8,7 +8,7 @@
 </head>
 <body>
     <div>
-      <h1>Wake up Log</h1>
+      <h1>AVG</h1>
     </div>
     <td>Search Interval</td>
     <td><input type="text" id="starttime" placeholder="1900-00-00 HH:MM:SS"></td>
@@ -37,24 +37,14 @@
     <table>
       <tr>
         <th>IDX</th>
-        <th>ONTIME</th>
-        <th>OFFTIME</th>
-        <th>TEMPRATURE</th>
-        <th>LIGHT</th>
-        <th>PRESS</th>
-        <th>ALTITUDE</th>
+        <th>AVG TIME TO WAKE UP</th>
       </tr>
       <tr>
       </tr>
     <% wakeuplogList.forEach(function(item, index){%>
       <tr>
         <td><%=index+1%></td>
-        <td><input type="text" value="<%=item.Alarmon%>"></td>
-        <td><input type="text" value="<%=item.Alarmoff%>"></td>
-        <td><input type="text" value="<%=item.Temp%>"></td>
-        <td><input type="text" value="<%=item.Light%>"></td>
-        <td><input type="text" value="<%=item.Press%>"></td>
-        <td><input type="text" value="<%=item.Alti%>"></td>
+        <td><input type="text" value="<%=item.AVG%>"></td>
       </tr>
     <% }); %>
     </table>

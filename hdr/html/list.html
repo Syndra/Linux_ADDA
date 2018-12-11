@@ -8,7 +8,7 @@
 </head>
 <body>
     <div>
-      <h1>Log</h1>
+      <h1>All Log</h1>
     </div>
     <td>Search Interval</td>
     <td><input type="text" id="starttime" placeholder="1900-00-00 HH:MM:SS"></td>
@@ -18,6 +18,7 @@
     <input type="button" value="WAKEUPLOG" id="submit" onClick="goPost('searchwakeuplog')">
     <table>
       <tr>
+        <th>IDX</th>
         <th>DATETIME</th>
         <th>TEMPRATURE</th>
         <th>LIGHT</th>
@@ -26,6 +27,16 @@
       </tr>
       <tr>
       </tr>
+    <% logList.forEach(function(item, index){%>
+      <tr>
+        <td><%=index+1%></td>
+        <td><input type="text" value="<%=item.Date%>"></td>
+        <td><input type="text" value="<%=item.Temp%>"></td>
+        <td><input type="text" value="<%=item.Light%>"></td>
+        <td><input type="text" value="<%=item.Press%>"></td>
+        <td><input type="text" value="<%=item.Alti%>"></td>
+      </tr>
+    <% }); %>
     </table>
 </body>
 </html>
