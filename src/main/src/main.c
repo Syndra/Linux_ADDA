@@ -56,10 +56,14 @@ void timer_routine()
 	threadshold++;
 	if(threadshold > THREADSHOLD && onNight == 1) {
 		if(cur_light < DET_MORNING){
+			threadshold = 0;
 			alarm_on();
 			alarmRun = 1;
 			onNight = 0;
 			alarmonTime = get_DATETIME_format();
+		}
+		else{
+			threadshold = 0;
 		}
 	}
 

@@ -50,7 +50,7 @@ void insert_data_wake(float temp, float alti, float press, float light, char* al
   char query[255];
 
   sprintf(query, "INSERT INTO %s (Temp, Light, Press, Alti, Alarmon, Alarmoff) VALUES ('%f', '%f', '%f', '%f', '%s', '%s')",
-        g_table_name, temp, alti, press, light, alarmtime, waketime);
+        g_table_name, temp, light, press, alti, alarmtime, waketime);
 
   if(mysql_query(conn, query))
   {
