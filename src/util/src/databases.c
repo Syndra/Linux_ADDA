@@ -30,7 +30,7 @@ void insert_data(float temp, float alti, float press, float light, char* datetim
   char query[255];
 
   sprintf(query, "INSERT INTO %s (Temp, Light, Press, Alti, Date) VALUES ('%f', '%f', '%f', '%f', '%s')",
-        g_table_name, temp, alti, press, light, datetime);
+        g_table_name, temp, light, press, alti, datetime);
 
   if(mysql_query(conn, query))
   {
