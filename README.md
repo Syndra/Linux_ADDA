@@ -33,6 +33,7 @@
     
 4. 서버 구동
     cd ./nodejs
+    sudo npm install
     node express.js &
 5. 프로그램 빌드
     make
